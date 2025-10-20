@@ -1,11 +1,3 @@
-# Aula 01 - Exemplo 02: Verificador de Status de Sites
-
-# Este script verifica o status de uma lista de sites.
-# É útil para aprender a:
-# 1. Lidar com múltiplas requisições em um loop.
-# 2. Tratar erros para cada requisição individualmente, sem parar o script.
-# 3. Usar o método `requests.head()`, que é mais rápido que `get()` se você só precisa dos headers e do status.
-
 import requests
 
 SITES_PARA_VERIFICAR = [
@@ -24,7 +16,7 @@ print("--- Iniciando Verificador de Status de Sites ---\n")
 
 for site in SITES_PARA_VERIFICAR:
     try:
-        # Usamos `head` pois é mais rápido, não baixa o corpo da página.
+        # Usamos `head` pois é mais rápido, não baixa o corpo da página
         # `allow_redirects=True` permite seguir redirecionamentos (ex: http para https)
         response = requests.head(site, headers=HEADERS, timeout=5, allow_redirects=True)
 

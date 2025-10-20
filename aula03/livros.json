@@ -1,0 +1,102 @@
+[
+  {
+    "titulo": "A Light in the Attic",
+    "preco": 51.77,
+    "avaliacao": 3
+  },
+  {
+    "titulo": "Tipping the Velvet",
+    "preco": 53.74,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "Soumission",
+    "preco": 50.1,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "Sharp Objects",
+    "preco": 47.82,
+    "avaliacao": 4
+  },
+  {
+    "titulo": "Sapiens: A Brief History of Humankind",
+    "preco": 54.23,
+    "avaliacao": 5
+  },
+  {
+    "titulo": "The Requiem Red",
+    "preco": 22.65,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "The Dirty Little Secrets of Getting Your Dream Job",
+    "preco": 33.34,
+    "avaliacao": 4
+  },
+  {
+    "titulo": "The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull",
+    "preco": 17.93,
+    "avaliacao": 3
+  },
+  {
+    "titulo": "The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics",
+    "preco": 22.6,
+    "avaliacao": 4
+  },
+  {
+    "titulo": "The Black Maria",
+    "preco": 52.15,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "Starving Hearts (Triangular Trade Trilogy, #1)",
+    "preco": 13.99,
+    "avaliacao": 2
+  },
+  {
+    "titulo": "Shakespeare's Sonnets",
+    "preco": 20.66,
+    "avaliacao": 4
+  },
+  {
+    "titulo": "Set Me Free",
+    "preco": 17.46,
+    "avaliacao": 5
+  },
+  {
+    "titulo": "Scott Pilgrim's Precious Little Life (Scott Pilgrim #1)",
+    "preco": 52.29,
+    "avaliacao": 5
+  },
+  {
+    "titulo": "Rip it Up and Start Again",
+    "preco": 35.02,
+    "avaliacao": 5
+  },
+  {
+    "titulo": "Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991",
+    "preco": 57.25,
+    "avaliacao": 3
+  },
+  {
+    "titulo": "Olio",
+    "preco": 23.88,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "Mesaerion: The Best Science Fiction Stories 1800-1849",
+    "preco": 37.59,
+    "avaliacao": 1
+  },
+  {
+    "titulo": "Libertarianism for Beginners",
+    "preco": 51.33,
+    "avaliacao": 2
+  },
+  {
+    "titulo": "It's Only the Himalayas",
+    "preco": 45.17,
+    "avaliacao": 2
+  }
+]
