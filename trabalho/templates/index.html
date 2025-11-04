@@ -2,67 +2,170 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Extrator de Matérias - Omelete</title>
     <style>
+      /* ====== ESTILO GERAL ====== */
       body {
-        font-family: Arial, sans-serif;
-        background-color: #f3f4f6;
+        font-family: "Poppins", Arial, sans-serif;
+        background: linear-gradient(135deg, #f1f5f9, #dbeafe);
         margin: 0;
-        padding: 20px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
       }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.6s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       h1 {
         text-align: center;
-        color: #222;
+        color: #111827;
+        margin-bottom: 20px;
+        font-size: 28px;
       }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      /* ====== FORMULÁRIO ====== */
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
       }
+
       input[type="text"] {
-        width: 80%;
-        padding: 10px;
+        flex: 1 1 70%;
+        padding: 12px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
         font-size: 16px;
-      }
-      button {
-        padding: 10px 15px;
-        font-size: 16px;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        background-color: #4caf50;
-        color: white;
+        outline: none;
         transition: 0.3s;
       }
-      button:hover {
-        background-color: #45a049;
+
+      input[type="text"]:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
       }
+
+      button {
+        padding: 12px 18px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      button[type="submit"] {
+        background-color: #2563eb;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #1e40af;
+      }
+
+      #btn-salvar {
+        background-color: #059669;
+      }
+
+      #btn-salvar:hover {
+        background-color: #047857;
+      }
+
+      /* ====== MENSAGEM ====== */
+      #mensagem {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 500;
+        color: #374151;
+      }
+
+      /* ====== TABELA ====== */
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        margin-top: 25px;
+        border-radius: 12px;
+        overflow: hidden;
       }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: left;
-      }
+
       th {
-        background-color: #f2f2f2;
+        background-color: #f1f5f9;
+        color: #111827;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid #e2e8f0;
       }
-      #mensagem {
-        margin-top: 10px;
-        font-weight: bold;
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      tr:hover {
+        background-color: #f9fafb;
+      }
+
+      a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ====== BOTÃO SALVAR ====== */
+      #btn-salvar {
+        display: none;
+        margin: 20px auto 0;
+        display: block;
+      }
+
+      /* ====== RESPONSIVO ====== */
+      @media (max-width: 600px) {
+        input[type="text"] {
+          flex: 1 1 100%;
+        }
+
+        button[type="submit"],
+        #btn-salvar {
+          width: 100%;
+        }
+
+        table {
+          font-size: 14px;
+        }
       }
     </style>
   </head>
+
   <body>
     <div class="container">
-      <h1>Extrator de Matérias - Omelete</h1>
+      <h1>📰 Extrator de Matérias - Omelete</h1>
 
       <form id="form-extrair">
         <input
@@ -87,9 +190,7 @@
         <tbody></tbody>
       </table>
 
-      <button id="btn-salvar" style="display: none; background-color: #2196f3">
-        Salvar JSON
-      </button>
+      <button id="btn-salvar">💾 Salvar JSON</button>
     </div>
 
     <script>
@@ -103,7 +204,7 @@
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const url = document.getElementById("url").value;
-        mensagem.textContent = "Buscando dados...";
+        mensagem.textContent = "⏳ Buscando dados...";
         tabela.style.display = "none";
         btnSalvar.style.display = "none";
 
@@ -124,13 +225,14 @@
           dadosMaterias = dados;
           tbody.innerHTML = "";
           dados.forEach((m, i) => {
-            const row = `<tr>
-                        <td>${i + 1}</td>
-                        <td>${m.titulo}</td>
-                        <td><a href="${m.link}" target="_blank">${
+            const row = `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${m.titulo}</td>
+                <td><a href="${m.link}" target="_blank">${
               m.link || "—"
             }</a></td>
-                      </tr>`;
+              </tr>`;
             tbody.insertAdjacentHTML("beforeend", row);
           });
 
