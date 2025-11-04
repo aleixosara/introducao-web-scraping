@@ -4,33 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Extrator de Matérias - Omelete</title>
+
+    <!-- Fonte moderna -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-      /* ====== ESTILO GERAL ====== */
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1e40af;
+        --success: #10b981;
+        --background: #f1f5f9;
+        --card: #ffffff;
+        --text: #111827;
+        --gray: #6b7280;
+      }
+
       body {
-        font-family: "Poppins", Arial, sans-serif;
-        background: linear-gradient(135deg, #f1f5f9, #dbeafe);
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #e0f2fe, #dbeafe, #f1f5f9);
         margin: 0;
-        padding: 0;
+        padding: 60px 20px; /* espaçamento superior e inferior */
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: flex-start;
         min-height: 100vh;
       }
 
       .container {
-        width: 90%;
-        max-width: 900px;
-        background: #ffffff;
+        background: var(--card);
+        width: 95%;
+        max-width: 950px;
         border-radius: 16px;
-        padding: 30px;
+        padding: 40px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.6s ease;
+        animation: fadeIn 0.8s ease;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
@@ -40,66 +56,75 @@
 
       h1 {
         text-align: center;
-        color: #111827;
-        margin-bottom: 20px;
-        font-size: 28px;
+        color: var(--text);
+        font-size: 30px;
+        margin-bottom: 10px;
       }
 
-      /* ====== FORMULÁRIO ====== */
+      h1 span {
+        color: var(--primary);
+      }
+
+      p.subtitle {
+        text-align: center;
+        color: var(--gray);
+        margin-bottom: 25px;
+      }
+
       form {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 12px;
         justify-content: center;
+        margin-bottom: 20px;
       }
 
       input[type="text"] {
         flex: 1 1 70%;
-        padding: 12px 14px;
+        padding: 14px 16px;
         border: 1px solid #cbd5e1;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 16px;
         outline: none;
-        transition: 0.3s;
+        transition: all 0.3s;
       }
 
       input[type="text"]:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
       }
 
       button {
-        padding: 12px 18px;
+        padding: 14px 20px;
         font-size: 16px;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         cursor: pointer;
         color: white;
         transition: all 0.3s ease;
       }
 
       button[type="submit"] {
-        background-color: #2563eb;
+        background-color: var(--primary);
       }
 
       button[type="submit"]:hover {
-        background-color: #1e40af;
+        background-color: var(--primary-dark);
       }
 
       #btn-salvar {
-        background-color: #059669;
+        background-color: var(--success);
       }
 
       #btn-salvar:hover {
         background-color: #047857;
       }
 
-      /* ====== MENSAGEM ====== */
       #mensagem {
         text-align: center;
-        margin-top: 15px;
+        margin-top: 10px;
         font-weight: 500;
-        color: #374151;
+        color: var(--gray);
       }
 
       /* ====== TABELA ====== */
@@ -107,14 +132,14 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 25px;
-        border-radius: 12px;
+        border-radius: 10px;
         overflow: hidden;
       }
 
       th {
         background-color: #f1f5f9;
-        color: #111827;
-        padding: 12px;
+        color: var(--text);
+        padding: 14px;
         text-align: left;
         font-weight: 600;
         border-bottom: 2px solid #e2e8f0;
@@ -123,30 +148,39 @@
       td {
         padding: 12px;
         border-bottom: 1px solid #e5e7eb;
+        color: var(--text);
       }
 
       tr:hover {
         background-color: #f9fafb;
+        transition: 0.3s;
       }
 
       a {
-        color: #2563eb;
+        color: var(--primary);
         text-decoration: none;
+        font-weight: 500;
       }
 
       a:hover {
         text-decoration: underline;
       }
 
-      /* ====== BOTÃO SALVAR ====== */
       #btn-salvar {
         display: none;
-        margin: 20px auto 0;
+        margin: 25px auto 0;
         display: block;
       }
 
-      /* ====== RESPONSIVO ====== */
-      @media (max-width: 600px) {
+      @media (max-width: 650px) {
+        .container {
+          padding: 25px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
         input[type="text"] {
           flex: 1 1 100%;
         }
@@ -165,7 +199,10 @@
 
   <body>
     <div class="container">
-      <h1>📰 Extrator de Matérias - Omelete</h1>
+      <h1><span>Extrator</span> de Matérias - Omelete</h1>
+      <p class="subtitle">
+        Digite o link do site e veja as matérias listadas automaticamente.
+      </p>
 
       <form id="form-extrair">
         <input
@@ -190,7 +227,7 @@
         <tbody></tbody>
       </table>
 
-      <button id="btn-salvar">💾 Salvar JSON</button>
+      <button id="btn-salvar">Salvar JSON</button>
     </div>
 
     <script>
@@ -230,7 +267,7 @@
                 <td>${i + 1}</td>
                 <td>${m.titulo}</td>
                 <td><a href="${m.link}" target="_blank">${
-              m.link || "—"
+              m.link ? "Acessar" : "—"
             }</a></td>
               </tr>`;
             tbody.insertAdjacentHTML("beforeend", row);
@@ -240,7 +277,7 @@
           tabela.style.display = "table";
           btnSalvar.style.display = "inline-block";
         } catch (err) {
-          mensagem.textContent = "Erro: " + err.message;
+          mensagem.textContent = "⚠️ Erro: " + err.message;
         }
       });
 
