@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Extrator de Matérias - Omelete</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #222;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        transition: 0.3s;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      #mensagem {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Extrator de Matérias - Omelete</h1>
+
+      <form id="form-extrair">
+        <input
+          type="text"
+          id="url"
+          value="https://www.omelete.com.br/"
+          required
+        />
+        <button type="submit">Extrair</button>
+      </form>
+
+      <p id="mensagem"></p>
+
+      <table id="tabela" style="display: none">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button id="btn-salvar" style="display: none; background-color: #2196f3">
+        Salvar JSON
+      </button>
+    </div>
+
+    <script>
+      const form = document.getElementById("form-extrair");
+      const tabela = document.getElementById("tabela");
+      const tbody = tabela.querySelector("tbody");
+      const mensagem = document.getElementById("mensagem");
+      const btnSalvar = document.getElementById("btn-salvar");
+      let dadosMaterias = [];
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const url = document.getElementById("url").value;
+        mensagem.textContent = "Buscando dados...";
+        tabela.style.display = "none";
+        btnSalvar.style.display = "none";
+
+        try {
+          const response = await fetch("/extrair", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ url }),
+          });
+
+          const dados = await response.json();
+
+          if (dados.erro) {
+            mensagem.textContent = "❌ " + dados.erro;
+            return;
+          }
+
+          dadosMaterias = dados;
+          tbody.innerHTML = "";
+          dados.forEach((m, i) => {
+            const row = `<tr>
+                        <td>${i + 1}</td>
+                        <td>${m.titulo}</td>
+                        <td><a href="${m.link}" target="_blank">${
+              m.link || "—"
+            }</a></td>
+                      </tr>`;
+            tbody.insertAdjacentHTML("beforeend", row);
+          });
+
+          mensagem.textContent = `✅ ${dados.length} matérias encontradas.`;
+          tabela.style.display = "table";
+          btnSalvar.style.display = "inline-block";
+        } catch (err) {
+          mensagem.textContent = "Erro: " + err.message;
+        }
+      });
+
+      btnSalvar.addEventListener("click", async () => {
+        const response = await fetch("/salvar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dadosMaterias),
+        });
+        const res = await response.json();
+        mensagem.textContent = res.mensagem || "Erro ao salvar.";
+      });
+    </script>
+  </body>
+</html>
