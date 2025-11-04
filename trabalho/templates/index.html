@@ -5,193 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Extrator de Matérias - Omelete</title>
 
-    <!-- Fonte moderna -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
     <style>
-      :root {
-        --primary: #2563eb;
-        --primary-dark: #1e40af;
-        --success: #10b981;
-        --background: #f1f5f9;
-        --card: #ffffff;
-        --text: #111827;
-        --gray: #6b7280;
+      /* === RESET E BASE === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #e0f2fe, #dbeafe, #f1f5f9);
-        margin: 0;
-        padding: 60px 20px; /* espaçamento superior e inferior */
+        background: linear-gradient(135deg, #000000, #4a70a9);
+        color: #efece3;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
+        align-items: center;
+        padding: 30px;
       }
 
       .container {
-        background: var(--card);
-        width: 95%;
-        max-width: 950px;
-        border-radius: 16px;
-        padding: 40px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.8s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      h1 {
+        background: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        max-width: 800px;
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
         text-align: center;
-        color: var(--text);
-        font-size: 30px;
+        backdrop-filter: blur(10px);
+      }
+
+      /* === TÍTULOS === */
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #efece3;
         margin-bottom: 10px;
       }
 
       h1 span {
-        color: var(--primary);
+        color: #8fabd4;
       }
 
-      p.subtitle {
-        text-align: center;
-        color: var(--gray);
+      .subtitle {
+        font-size: 0.95rem;
+        color: #dcd9d2;
         margin-bottom: 25px;
       }
 
+      /* === FORMULÁRIO === */
       form {
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
       }
 
       input[type="text"] {
-        flex: 1 1 70%;
-        padding: 14px 16px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        font-size: 16px;
+        width: 70%;
+        padding: 12px 15px;
+        border: 2px solid #8fabd4;
+        border-radius: 12px;
+        font-size: 1rem;
         outline: none;
-        transition: all 0.3s;
-      }
-
-      input[type="text"]:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-      }
-
-      button {
-        padding: 14px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        color: white;
-        transition: all 0.3s ease;
-      }
-
-      button[type="submit"] {
-        background-color: var(--primary);
-      }
-
-      button[type="submit"]:hover {
-        background-color: var(--primary-dark);
-      }
-
-      #btn-salvar {
-        background-color: var(--success);
-      }
-
-      #btn-salvar:hover {
-        background-color: #047857;
-      }
-
-      #mensagem {
-        text-align: center;
-        margin-top: 10px;
-        font-weight: 500;
-        color: var(--gray);
-      }
-
-      /* ====== TABELA ====== */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 25px;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      th {
-        background-color: #f1f5f9;
-        color: var(--text);
-        padding: 14px;
-        text-align: left;
-        font-weight: 600;
-        border-bottom: 2px solid #e2e8f0;
-      }
-
-      td {
-        padding: 12px;
-        border-bottom: 1px solid #e5e7eb;
-        color: var(--text);
-      }
-
-      tr:hover {
-        background-color: #f9fafb;
+        background-color: #111;
+        color: #efece3;
         transition: 0.3s;
       }
 
+      input[type="text"]:focus {
+        border-color: #4a70a9;
+        background-color: #1c1c1c;
+      }
+
+      button {
+        padding: 12px 18px;
+        background-color: #4a70a9;
+        border: none;
+        border-radius: 12px;
+        color: #efece3;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background-color: #8fabd4;
+        color: #000;
+        transform: scale(1.05);
+      }
+
+      #mensagem {
+        margin: 10px 0;
+        font-size: 1rem;
+        color: #efece3;
+      }
+
+      /* === TABELA === */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #4a70a9;
+        color: #efece3;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      tr:hover {
+        background-color: rgba(143, 171, 212, 0.1);
+      }
+
       a {
-        color: var(--primary);
+        color: #8fabd4;
         text-decoration: none;
         font-weight: 500;
       }
 
       a:hover {
         text-decoration: underline;
+        color: #efece3;
       }
 
+      /* === BOTÃO SALVAR === */
       #btn-salvar {
+        margin-top: 25px;
+        background-color: #8fabd4;
+        color: #000;
         display: none;
-        margin: 25px auto 0;
-        display: block;
       }
 
-      @media (max-width: 650px) {
-        .container {
-          padding: 25px;
-        }
+      #btn-salvar:hover {
+        background-color: #efece3;
+        color: #000;
+      }
 
-        h1 {
-          font-size: 24px;
+      /* === RESPONSIVIDADE === */
+      @media (max-width: 650px) {
+        form {
+          flex-direction: column;
+          gap: 15px;
         }
 
         input[type="text"] {
-          flex: 1 1 100%;
-        }
-
-        button[type="submit"],
-        #btn-salvar {
           width: 100%;
         }
 
-        table {
-          font-size: 14px;
+        h1 {
+          font-size: 1.8rem;
         }
       }
     </style>
