@@ -282,14 +282,24 @@
       });
 
       btnSalvar.addEventListener("click", async () => {
-        const response = await fetch("/salvar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dadosMaterias),
-        });
-        const res = await response.json();
-        mensagem.textContent = res.mensagem || "Erro ao salvar.";
+        try {
+          const response = await fetch("/salvar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosMaterias),
+          });
+      
+          const res = await response.json();
+      
+          mensagem.textContent = res.mensagem || "Erro ao salvar.";
+      
+          alert(res.mensagem || "Arquivo salvo com sucesso!");
+        } catch (err) {
+          mensagem.textContent = "Erro ao salvar: " + err.message;
+          alert("Erro ao salvar: " + err.message);
+        }
       });
+      
     </script>
   </body>
 </html>
